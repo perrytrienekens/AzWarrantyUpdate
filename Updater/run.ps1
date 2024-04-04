@@ -3,35 +3,35 @@ param($Timer)
 function Start-WarrantySync {
 
   if ($ENV:DattoAPIURL) {
-    update-warrantyinfo -dattormm -DattoAPIKey $ENV:DattoRMMKey -DattoAPISecret $ENV:DattoAPISecret -DattoAPIURL $ENV:DattoAPIURL -SyncWithSource -OverwriteWarranty
+    update-warrantyinfo -dattormm -DattoAPIKey $ENV:DattoRMMKey -DattoAPISecret $ENV:DattoAPISecret -DattoAPIURL $ENV:DattoAPIURL -SyncWithSource
     Add-Content 'lastrun.txt' -Value "$(get-date)" -Force
   }
   
   if ($ENV:ItglueAPIURL) {
-    update-warrantyinfo -ITGlue -ITGlueAPIURL $ENV:ITGlueAPIURL -ITGlueAPIKey $ENV:ITGlueAPIKey -SyncWithSource -ReturnWarrantyObject -OverwriteWarranty
+    update-warrantyinfo -ITGlue -ITGlueAPIURL $ENV:ITGlueAPIURL -ITGlueAPIKey $ENV:ITGlueAPIKey -SyncWithSource -ReturnWarrantyObject
     Add-Content 'lastrun.txt' -Value "$(get-date)" -Force
   }
   
   if ($ENV:NableHostname) {
-    update-warrantyinfo -Nable -NableURL $ENV:NableHostname -NableJWT $ENV:JWTKey -SyncWithSource -ReturnWarrantyObject -OverwriteWarranty
+    update-warrantyinfo -Nable -NableURL $ENV:NableHostname -NableJWT $ENV:JWTKey -SyncWithSource -ReturnWarrantyObject
     Add-Content 'lastrun.txt' -Value "$(get-date)" -Force
   }
     
   if ($ENV:HuduHostname) {
-    update-warrantyinfo -Hudu -HuduBaseURL $ENV:HuduHostname -HuduAPIKey $ENV:huduKey -SyncWithSource -ReturnWarrantyObject -OverwriteWarranty
+    update-warrantyinfo -Hudu -HuduBaseURL $ENV:HuduHostname -HuduAPIKey $ENV:huduKey -SyncWithSource -ReturnWarrantyObject
     Add-Content 'lastrun.txt' -Value "$(get-date)" -Force
   }
     
   if ($ENV:AutotaskHostName) {
     $ATCreds = New-Object System.Management.Automation.PSCredential ($ENV:AutotaskAPIUsername, ($ENV:AutotaskAPIpassword | ConvertTo-SecureString -Force -AsPlainText))
 
-    update-warrantyinfo -Autotask -AutotaskAPIKey $ENV:AutotaskIntCode -AutotaskCredentials $ATCreds -SyncWithSource -ReturnWarrantyObject -OverwriteWarranty
+    update-warrantyinfo -Autotask -AutotaskAPIKey $ENV:AutotaskIntCode -AutotaskCredentials $ATCreds -SyncWithSource -ReturnWarrantyObject
     Add-Content 'lastrun.txt' -Value "$(get-date)" -Force
   }
     
 
   if ($ENV:CWMHostname) {
-    update-warrantyinfo -CWManage -CWManagePublicKey $ENV:CWPubKey -CWManagePrivateKey $ENV:CWPrivKey -CWManageAPIURL $ENV:CWMHostname -CWManageCompanyID $ENV:CWMCompanyId -SyncWithSource -ReturnWarrantyObject -OverwriteWarranty
+    update-warrantyinfo -CWManage -CWManagePublicKey $ENV:CWPubKey -CWManagePrivateKey $ENV:CWPrivKey -CWManageAPIURL $ENV:CWMHostname -CWManageCompanyID $ENV:CWMCompanyId -SyncWithSource -ReturnWarrantyObject
     Add-Content 'lastrun.txt' -Value "$(get-date)" -Force
   }
   

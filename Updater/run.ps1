@@ -3,29 +3,29 @@ param($Timer)
 function Start-WarrantySync {
 
   if ($ENV:DattoAPIURL) {
-    update-warrantyinfo -dattormm -DattoAPIKey $ENV:DattoRMMKey -DattoAPISecret $ENV:DattoAPISecret -DattoAPIURL $ENV:DattoAPIURL -SyncWithSource -ExcludeApple -ExcludeLenovo
+    update-warrantyinfo -dattormm -DattoAPIKey $ENV:DattoRMMKey -DattoAPISecret $ENV:DattoAPISecret -DattoAPIURL $ENV:DattoAPIURL -SyncWithSource -ExcludeApple
     Add-Content 'lastrun.txt' -Value "$(get-date)" -Force
   }
   
   if ($ENV:ItglueAPIURL) {
-    update-warrantyinfo -ITGlue -ITGlueAPIURL $ENV:ITGlueAPIURL -ITGlueAPIKey $ENV:ITGlueAPIKey -SyncWithSource -ReturnWarrantyObject -ExcludeApple -ExcludeLenovo
+    update-warrantyinfo -ITGlue -ITGlueAPIURL $ENV:ITGlueAPIURL -ITGlueAPIKey $ENV:ITGlueAPIKey -SyncWithSource -ReturnWarrantyObject -ExcludeApple
     Add-Content 'lastrun.txt' -Value "$(get-date)" -Force
   }
   
   if ($ENV:NableHostname) {
-    update-warrantyinfo -Nable -NableURL $ENV:NableHostname -NableJWT $ENV:JWTKey -SyncWithSource -ReturnWarrantyObject -ExcludeApple -ExcludeLenovo
+    update-warrantyinfo -Nable -NableURL $ENV:NableHostname -NableJWT $ENV:JWTKey -SyncWithSource -ReturnWarrantyObject -ExcludeApple
     Add-Content 'lastrun.txt' -Value "$(get-date)" -Force
   }
     
   if ($ENV:HuduHostname) {
-    update-warrantyinfo -Hudu -HuduBaseURL $ENV:HuduHostname -HuduAPIKey $ENV:huduKey -SyncWithSource -ReturnWarrantyObject -ExcludeApple -ExcludeLenovo
+    update-warrantyinfo -Hudu -HuduBaseURL $ENV:HuduHostname -HuduAPIKey $ENV:huduKey -SyncWithSource -ReturnWarrantyObject -ExcludeApple
     Add-Content 'lastrun.txt' -Value "$(get-date)" -Force
   }
     
   if ($ENV:AutotaskHostName) {
     $ATCreds = New-Object System.Management.Automation.PSCredential ($ENV:AutotaskAPIUsername, ($ENV:AutotaskAPIpassword | ConvertTo-SecureString -Force -AsPlainText))
 
-    update-warrantyinfo -Autotask -AutotaskAPIKey $ENV:AutotaskIntCode -AutotaskCredentials $ATCreds -SyncWithSource -ReturnWarrantyObject -ExcludeApple -ExcludeLenovo
+    update-warrantyinfo -Autotask -AutotaskAPIKey $ENV:AutotaskIntCode -AutotaskCredentials $ATCreds -SyncWithSource -ReturnWarrantyObject -ExcludeApple
     Add-Content 'lastrun.txt' -Value "$(get-date)" -Force
   }
     
